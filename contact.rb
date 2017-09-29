@@ -45,6 +45,26 @@ class Contact
     full_name
   end
 
+  #Sobreescribimos el metodo to_string y creamos el metodo first last
+  def to_s(format = 'full_name')
+    case format
+    when 'full_name'
+      full_name
+    when 'last_first'
+      last_first
+    when 'first'
+      first_name
+    when 'last'
+      last_name
+    else
+      first_last
+    end
+  end
+
+def first_last
+    first_name + " " + last_name
+  end
+
 end
 
 david = Contact.new
@@ -54,6 +74,11 @@ david.last_name = "pique"
 #puts david.first_name + " " + david.last_name
 puts david.full_name
 puts david.last_first
+
+#Pasamos el to_s
+puts david.to_s
+puts david.to_s('full_name')
+puts david.to_s('last_first')
 
 
 #Añadimos otro
