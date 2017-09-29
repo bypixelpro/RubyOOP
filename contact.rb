@@ -1,9 +1,25 @@
+require "./phone_number"
+
+
 # attr_reader define un getter
 # attr_writer define un setter" 
 # attr_accessor define setters and getters
 
 class Contact
   attr_writer :first_name, :middle_name, :last_name
+  attr_reader :phone_numbers
+
+#Inicializamos el phone number attr_reader como un array vacio
+  def initialize
+    @phone_numbers = []
+  end
+#Creamos un metodo para añadir valores al array
+  def add_phone_number(kind, number)
+    phone_number = PhoneNumber.new
+    phone_number.kind = kind
+    phone_number.number = number
+    phone_numbers.push(phone_number)
+  end
 
   def first_name
     @first_name
@@ -65,11 +81,23 @@ def first_last
     first_name + " " + last_name
   end
 
+  #Imprimimos los números de telefono con each y el bloque
+  def print_phone_numbers
+    puts "Phone Numbers"
+    phone_numbers.each { |phone_number| puts phone_number }
+  end
+
 end
 
 david = Contact.new
 david.first_name = "david"
 david.last_name = "pique"
+david.add_phone_number("Casa", "91 765 23 12")
+david.add_phone_number("Móvil", "654 442 378")
+puts david.to_s('full_name')
+david.print_phone_numbers
+
+
 
 #puts david.first_name + " " + david.last_name
 puts david.full_name
