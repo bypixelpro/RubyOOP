@@ -1,4 +1,5 @@
 require "./phone_number"
+require "./adress"
 
 
 # attr_reader define un getter
@@ -7,11 +8,14 @@ require "./phone_number"
 
 class Contact
   attr_writer :first_name, :middle_name, :last_name
-  attr_reader :phone_numbers
+  #añadimos el atributo para las direcciones
+  attr_reader :phone_numbers, :addresses
 
 #Inicializamos el phone number attr_reader como un array vacio
   def initialize
     @phone_numbers = []
+    #creamos un array vacio
+    @addresses = []
   end
 #Creamos un metodo para añadir valores al array
   def add_phone_number(kind, number)
@@ -19,6 +23,21 @@ class Contact
     phone_number.kind = kind
     phone_number.number = number
     phone_numbers.push(phone_number)
+  end
+
+  #creamos un metodo para las direcciones con sus parametros
+  def add_address(kind, street_1, street_2, city, state, postal_code)
+    #instanciamos
+    address = Address.new
+    #y le damos los atributos
+    address.kind = kind
+    address.street_1 = street_1
+    address.street_2 = street_2
+    address.city = city
+    address.state = state
+    address.postal_code = postal_code
+    #se lo enchumamos al array, no hay que poner add
+    addresses.push(address)
   end
 
   def first_name
@@ -86,7 +105,11 @@ def first_last
     puts "Phone Numbers"
     phone_numbers.each { |phone_number| puts phone_number }
   end
-
+#Hacemos el print de las direcciones
+  def print_addresses
+    puts "Dirección"
+    addresses.each { |address| puts address.to_s('corta') }
+  end
 end
 
 david = Contact.new
@@ -94,9 +117,14 @@ david.first_name = "david"
 david.last_name = "pique"
 david.add_phone_number("Casa", "91 765 23 12")
 david.add_phone_number("Móvil", "654 442 378")
+david.add_address("Trabajo", "Ronda de Segovia 50", "", "Madrid", "Madrid", "28009")
+
 puts david.to_s('full_name')
 david.print_phone_numbers
+david.print_addresses
 
+
+=begin
 
 
 #puts david.first_name + " " + david.last_name
@@ -117,6 +145,6 @@ daniel.last_name = "Maria"
 puts daniel.full_name
 puts daniel.last_first
 
-
+=end
 
 
