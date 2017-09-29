@@ -14,7 +14,7 @@ class Contact
 #Inicializamos el phone number attr_reader como un array vacio
   def initialize
     @phone_numbers = []
-    #creamos un array vacio
+    #creamos un array vacio, al ser @ de instancia cualquier metodo puede acceder
     @addresses = []
   end
 #Creamos un metodo para añadir valores al array
@@ -111,7 +111,7 @@ def first_last
     addresses.each { |address| puts address.to_s('corta') }
   end
 end
-
+=begin nos lo llevamos al address book
 david = Contact.new
 david.first_name = "david"
 david.last_name = "pique"
@@ -122,7 +122,7 @@ david.add_address("Trabajo", "Ronda de Segovia 50", "", "Madrid", "Madrid", "280
 puts david.to_s('full_name')
 david.print_phone_numbers
 david.print_addresses
-
+=end
 
 =begin
 
