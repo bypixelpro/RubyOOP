@@ -102,7 +102,7 @@ def first_last
 
   #Imprimimos los números de telefono con each y el bloque
   def print_phone_numbers
-    puts "Phone Numbers"
+    puts "Números de teléfono:"
     phone_numbers.each { |phone_number| puts phone_number }
   end
 #Hacemos el print de las direcciones
