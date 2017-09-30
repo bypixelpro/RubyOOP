@@ -51,6 +51,24 @@ print_results("Búsqueda de contacto: (#{search})", results)
         
       end 
 
+      #Nuevo método y final para buscar por la dirección+
+      def find_by_address(query)
+        results = []
+        #La variable search sera una version downcase de la query que hagamos
+        search = query.downcase
+        #iteramos los contactos
+        contacts.each do |contact|
+            #y luego las direcciones
+          contact.addresses.each do |address|
+            #si esta en la version larga, hacemos un push en el resultado del array
+            if address.to_s('larga').downcase.include?(search)
+              results.push(contact) unless results.include?(contact)
+            end
+          end
+        end
+        print_results("Búsqueda por dirección: (#{search})", results)
+      end
+
       def print_results(search, results)
         puts search
         results.each do |contact|
@@ -78,7 +96,7 @@ print_results("Búsqueda de contacto: (#{search})", results)
   david.last_name = "Piqué"
   david.add_phone_number("Casa", "91 765 23 12")
   david.add_phone_number("Móvil", "654 442 378")
-  david.add_address("Trabajo", "Ronda de Segovia 50", "", "Madrid", "Madrid", "28009")
+  david.add_address("Trabajo", "los robles 17", "", "Madrid", "Madrid", "28009")
 
 
   daniel = Contact.new
@@ -95,7 +113,9 @@ print_results("Búsqueda de contacto: (#{search})", results)
   
   #address_book.print_contact_list
 
-  address_book.find_by_name("é")
-  address_book.find_by_phone_number("0")
+  #address_book.find_by_name("é")
+  #address_book.find_by_phone_number("0")
+  address_book.find_by_address("robles")
+  
   
   
