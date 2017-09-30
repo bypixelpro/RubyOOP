@@ -6,6 +6,24 @@ class AddressBook
     def initialize
       @contacts = []
     end
+
+#Creamos un menu para los usuarios
+def run
+    loop do
+      puts "Mi primer programa en Ruby iContactPro"
+      puts "Presiona la tecla -S- si deseas salir de la aplicación"
+      print 'Instrucción: '
+      input = gets.chomp
+      case input
+      when 'S'
+        break
+      end
+    end
+  end
+
+
+
+
 #Iteramos cada contacto, si el nombre coincide con el argumento, sacamos el resultado
     def find_by_name(name)
         results = []
@@ -90,7 +108,13 @@ print_results("Búsqueda de contacto: (#{search})", results)
   end
   
   address_book = AddressBook.new
+  address_book.run
 
+  
+  
+  
+  
+=begin
   david = Contact.new
   david.first_name = "David"
   david.last_name = "Piqué"
@@ -117,5 +141,5 @@ print_results("Búsqueda de contacto: (#{search})", results)
   #address_book.find_by_phone_number("0")
   address_book.find_by_address("robles")
   
-  
+=end
   
