@@ -1,10 +1,25 @@
 require "./contact"
+require "yaml"
 
 class AddressBook
     attr_reader :contacts
   
     def initialize
       @contacts = []
+      #al inicializar cargamos los contactos
+      open()
+    end
+
+    def open
+        if File.exist?("contacts.yml")
+            @contacts = YAML.load_file("contacts.yml")
+          end
+    end
+
+    def save
+        File.open("contacts.yml", "w") do |file|
+            file.write(contacts.to_yaml)
+          end
     end
 
 #Creamos un menu para los usuarios
@@ -29,6 +44,8 @@ class AddressBook
         find_by_phone_number(search)
         find_by_address(search)
       when 's'
+        #antes de salir guardamos
+        save()
         break  
       end
       puts "\n"
