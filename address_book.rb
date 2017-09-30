@@ -8,17 +8,34 @@ class AddressBook
     end
 
 #Creamos un menu para los usuarios
-def run
+  def run
     loop do
       puts "Mi primer programa en Ruby iContactPro"
-      puts "Presiona la tecla -S- si deseas salir de la aplicación"
-      print 'Instrucción: '
-      input = gets.chomp
+      puts "a: Añadir un contacto"
+      puts "p: Mostrar contactos"
+      puts "s: Salir"
+      print "Instrucción: "
+      input = gets.chomp.downcase
       case input
-      when 'S'
-        break
+      when 'a'
+        add_contact
+      when 'p'
+        print_contact_list
+      when 's'
+        break  
       end
     end
+  end
+  
+  def add_contact
+    contact = Contact.new
+    print "Nombre: "
+    contact.first_name = gets.chomp
+    print "Apellido: "
+    contact.middle_name = gets.chomp
+    print "Apellido 2: "
+    contact.last_name = gets.chomp
+    contacts.push(contact)
   end
 
 
