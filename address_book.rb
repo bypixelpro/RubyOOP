@@ -25,6 +25,34 @@ class AddressBook
           puts "\n"
         end
       end 
+
+      #Nuevo método para buscar por el telefono
+      def find_by_phone_number(number)
+        #creamos un array vacio, no lo instanciamos por que es local para este metodo, ningun otro metodo accedera salvo que lo pasemos nosotors
+        results = []
+        #iniciamos la busqueda y esta vez, remplazaremos todos los - con ""nada con el meotdo gsub
+        search = number.gsub("-", "")
+        #Loop a traves de los contactos y sus telefonos
+        contacts.each do |contact|
+          contact.phone_numbers.each do |phone_number|
+            #Si hay resultados, se lo enchufamos al array result
+            if phone_number.number.gsub("-", "").include?(search)
+              results.push(contact) unless results.include?(contact)
+            end
+          end
+
+        end
+        puts "Resultado de la busqueda (#{search})"
+        #V1 Iteramos sobre el resultado sin tener el cuenta el DRY
+        results.each do |contact|
+          puts contact.to_s('full_name')
+          contact.print_phone_numbers
+          contact.print_addresses
+          puts "\n"
+        end
+      end 
+
+
   
     def print_contact_list
       puts "Contactos encontrados:"
@@ -58,5 +86,7 @@ class AddressBook
   
   #address_book.print_contact_list
 
-  address_book.find_by_name("é")
+  #address_book.find_by_name("é")
+  address_book.find_by_phone_number("65")
+  
   
