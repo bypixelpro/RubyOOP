@@ -15,6 +15,7 @@ class AddressBook
             results.push(contact)
           end
         end
+=begin
         #Imprimimos el resultado en pantalla
         puts "Resultado de la busqueda (#{search})"
         #Iteramos sobre el resultado
@@ -23,7 +24,10 @@ class AddressBook
           contact.print_phone_numbers
           contact.print_addresses
           puts "\n"
-        end
+=end
+print_results("Búsqueda de contacto: (#{search})", results)
+
+        
       end 
 
       #Nuevo método para buscar por el telefono
@@ -37,20 +41,25 @@ class AddressBook
           contact.phone_numbers.each do |phone_number|
             #Si hay resultados, se lo enchufamos al array result
             if phone_number.number.gsub("-", "").include?(search)
+                #Añadimos el resultado solo si no esta ya incluido, para no repetir unless results.include?(contact)
               results.push(contact) unless results.include?(contact)
             end
           end
 
         end
-        puts "Resultado de la busqueda (#{search})"
-        #V1 Iteramos sobre el resultado sin tener el cuenta el DRY
+        print_results("Búsqueda de teléfono: (#{search})", results)
+        
+      end 
+
+      def print_results(search, results)
+        puts search
         results.each do |contact|
           puts contact.to_s('full_name')
           contact.print_phone_numbers
           contact.print_addresses
           puts "\n"
         end
-      end 
+      end
 
 
   
@@ -76,7 +85,7 @@ class AddressBook
   daniel.first_name = "Daniel"
   daniel.last_name = "Ariza"
   daniel.add_phone_number("Casa", "91 765 23 12")
-  daniel.add_phone_number("Móvil", "654 442 378")
+  daniel.add_phone_number("Móvil", "654 442 370")
   daniel.add_address("Trabajo", "Ronda de Segovia 50", "", "Madrid", "Madrid", "28009")
   
 
@@ -86,7 +95,7 @@ class AddressBook
   
   #address_book.print_contact_list
 
-  #address_book.find_by_name("é")
-  address_book.find_by_phone_number("65")
+  address_book.find_by_name("é")
+  address_book.find_by_phone_number("0")
   
   
