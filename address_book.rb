@@ -13,6 +13,7 @@ class AddressBook
       puts "Mi primer programa en Ruby iContactPro"
       puts "a: Añadir un contacto"
       puts "p: Mostrar contactos"
+      puts "b: Buscar contactos"
       puts "s: Salir"
       print "Instrucción: "
       input = gets.chomp.downcase
@@ -21,9 +22,16 @@ class AddressBook
         add_contact
       when 'p'
         print_contact_list
+      when 'b'
+        puts "Término de búsqueda:"
+        search = gets.chomp
+        find_by_name(search)
+        find_by_phone_number(search)
+        find_by_address(search)
       when 's'
         break  
       end
+      puts "\n"
     end
   end
   
@@ -65,6 +73,7 @@ loop do
       print "CP: "
       address.postal_code = gets.chomp
       contact.addresses.push(address)
+
     else
       print "\n"
       break
