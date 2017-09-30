@@ -35,6 +35,44 @@ class AddressBook
     contact.middle_name = gets.chomp
     print "Apellido 2: "
     contact.last_name = gets.chomp
+#Añadimos el loop para telefono y dirección
+loop do
+    puts "¿Quieres añadir un teléfono o una dirección? "
+    puts "p: Añadir un teléfono"
+    puts "a: Añadir dirección"
+    puts "(Presiona cualquier tecla para volver)"
+    response = gets.chomp.downcase
+    case response
+    when 'p'
+      phone = PhoneNumber.new
+      print "Tipo de teléfono: (Casa, Móvil, Trabajo) "
+      phone.kind = gets.chomp
+      print "Número: "
+      phone.number = gets.chomp
+      contact.phone_numbers.push(phone)
+    when 'a'
+      address = Address.new
+      print "Tipo de dirección: (Casa, Oficina) "
+      address.kind = gets.chomp
+      print "Dirección: "
+      address.street_1 = gets.chomp
+      print "Añadir a dirección: "
+      address.street_2 = gets.chomp
+      print "Ciudad: "
+      address.city = gets.chomp
+      print "Provincia: "
+      address.state = gets.chomp
+      print "CP: "
+      address.postal_code = gets.chomp
+      contact.addresses.push(address)
+    else
+      print "\n"
+      break
+    end
+  end
+
+
+
     contacts.push(contact)
   end
 
